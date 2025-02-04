@@ -1,21 +1,21 @@
 package app;
 
 public class Ami {
-    private String nom;
+    private final String nom;
     private int nbBiereAvantDetreSaoul;
     private boolean estCuit;
 
-    public Ami(String nom, int nbBiereAvantDetreSaoul, boolean estCuit) {
+    public Ami(String nom, int nbBiereAvantDetreSaoul) {
         this.nom = nom;
         this.nbBiereAvantDetreSaoul = nbBiereAvantDetreSaoul;
-        this.estCuit = estCuit;
+        this.estCuit = (nbBiereAvantDetreSaoul == 0) ? true : false;
     }
 
     public String getNom() {
         return nom;
     }
 
-    public boolean getEstCuit() {
+    public boolean isCuit() {
         return estCuit;
     }
 
@@ -28,7 +28,11 @@ public class Ami {
     }
 
     public void boitUneBiere(){
-        this.nbBiereAvantDetreSaoul--;
+        if (nbBiereAvantDetreSaoul == 0) {
+            setEstCuit(true);
+        } else {
+            nbBiereAvantDetreSaoul--;
+        }
         System.out.println(this.nom + " boit une bière");
     }
 }
